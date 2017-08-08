@@ -21,6 +21,17 @@ namespace SvnPatcher
 			InitializeComponent();
 		}
 
+		public void LoadFromArguments(string patch, IEnumerable<string> directories)
+		{
+			txtPatchFile.Text = patch;
+			foreach (string directory in directories)
+			{
+				int index = dataGridView1.Rows.Add();
+				dataGridView1.Rows[index].Cells["SVNDirectory"].Value = directory;
+				dataGridView1.Rows[index].Cells["Selected"].Value = true;
+			}
+		}
+
 		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
 		{
 			var senderGrid = (DataGridView)sender;

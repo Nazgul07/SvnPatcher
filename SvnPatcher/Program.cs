@@ -12,11 +12,18 @@ namespace SvnPatcher
 		/// The main entry point for the application.
 		/// </summary>
 		[STAThread]
-		static void Main()
+		static void Main(string[] args)
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Main());
+			Main mainForm = new Main();
+			if (args.Any())
+			{
+				string patch = args[0];
+				IEnumerable<string> directories = args.Skip(1);
+				mainForm.LoadFromArguments(patch, directories);
+			}
+			Application.Run(mainForm);
 		}
 	}
 }
